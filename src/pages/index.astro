@@ -1,32 +1,5 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Nav from '../components/Nav.astro';
-import Hero from '../components/Hero.astro';
-import Marquee from '../components/Marquee.astro';
-import Works from '../components/Works.astro';
-import About from '../components/About.astro';
-import Stack from '../components/Stack.astro';
-import Experience from '../components/Experience.astro';
-import Contact from '../components/Contact.astro';
-import Footer from '../components/Footer.astro';
-import ToTop from '../components/ToTop.astro';
-import { marquee } from '../data/content';
+import HomePage from '../components/HomePage.astro';
 ---
 
-<Layout>
-  <ToTop />
-  <div class="site" id="topo">
-    <a class="skip" href="#trabalhos">Pular para os trabalhos</a>
-    <Nav />
-    <main>
-      <Hero />
-      <Marquee items={marquee} />
-      <Works />
-      <About />
-      <Stack />
-      <Experience />
-      <Contact />
-    </main>
-    <Footer />
-  </div>
-</Layout>
+<HomePage />

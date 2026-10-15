@@ -1,13 +1,15 @@
 ---
 import Icon from './Icon.astro';
 import Clock from './Clock.astro';
-import { contact } from '../data/content';
+import { contact, getContent } from '../data/content';
+
+const t = getContent(Astro.currentLocale);
 ---
 
 <footer class="foot" data-foot>
   <div class="wrap foot-in">
     <span>© 2026 Eduardo Nascimento</span>
     <span>{contact.location}<Clock suffix=" (GMT-3)" /></span>
-    <a class="top-link" href="#topo">Voltar ao topo <Icon name="arrow-up" size={14} /></a>
+    <a class="top-link" href="#topo">{t.footer.toTop} <Icon name="arrow-up" size={14} /></a>
   </div>
 </footer>

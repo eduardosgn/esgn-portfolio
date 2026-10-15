@@ -5,9 +5,10 @@ import Icon from './Icon.astro';
 
 interface Props extends Work {
   featured?: boolean;
+  cta: string;
 }
 
-const { title, description, href, image, alt, featured = false } = Astro.props;
+const { title, description, href, image, alt, featured = false, cta } = Astro.props;
 
 const sizes = featured
   ? '(max-width: 1080px) calc(100vw - 32px), (max-width: 1440px) 48vw, 680px'
@@ -26,7 +27,7 @@ const sizes = featured
       loading="lazy"
       decoding="async"
     />
-    <span class="card-cta">Ver no Behance ↗</span>
+    <span class="card-cta">{cta}</span>
   </div>
   <div class="card-info">
     <div>

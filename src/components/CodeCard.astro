@@ -1,4 +1,10 @@
-<figure class="code-card" aria-label="Resumo do perfil em formato de código">
+---
+import { getContent } from '../data/content';
+
+const t = getContent(Astro.currentLocale);
+---
+
+<figure class="code-card" aria-label={t.a11y.codeCard}>
   <div class="code-head">
     <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
     <span>edu.config.js</span>
@@ -7,7 +13,7 @@
   <code class="code">
     <span class="cl"><span class="k">const</span> edu <span class="p">=</span> <span class="p">{"{"}</span></span>
     <span class="cl"><i class="in"></i>role<span class="p">:</span> <span class="s">"Product Designer"</span><span class="p">,</span></span>
-    <span class="cl"><i class="in"></i>xp<span class="p">:</span> <span class="s">"6+ anos"</span><span class="p">,</span></span>
+    <span class="cl"><i class="in"></i>xp<span class="p">:</span> <span class="s">"{t.hero.codeXp}"</span><span class="p">,</span></span>
     <span class="cl"><i class="in"></i>front<span class="p">:</span> <span class="p">[</span><span class="s">"HTML"</span><span class="p">,</span> <span class="s">"CSS"</span><span class="p">,</span> <span class="s">"JS"</span><span class="p">],</span></span>
     <span class="cl"><i class="in"></i>frameworks<span class="p">:</span> <span class="p">[</span><span class="s">"Vue"</span><span class="p">,</span> <span class="s">"React"</span><span class="p">],</span></span>
     <span class="cl"><i class="in"></i>back<span class="p">:</span> <span class="p">[</span><span class="s">"Java"</span><span class="p">,</span> <span class="s">"Rust"</span><span class="p">],</span> <span class="c">// base</span></span>

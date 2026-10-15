@@ -154,13 +154,21 @@
   .roll > span + span { position: absolute; left: 0; top: 100%; }
   .nav-link:hover .roll > span, .btn:hover .roll > span { transform: translateY(-100%); }
   .nav-right { display: flex; align-items: center; gap: 10px; }
-  .clock { display: inline-flex; align-items: center; gap: 8px; padding-right: 6px; font-size: 12px; color: var(--mut); white-space: nowrap; }
   .colon { animation: blink 1.2s steps(1) infinite; }
   .icon-btn { display: inline-grid; place-items: center; flex: none; width: 44px; height: 44px; padding: 0; border-radius: 999px; border: 1px solid var(--line2); background: transparent; cursor: pointer; transition: border-color .3s, background-color .3s, transform .2s; }
   .icon-btn:hover { border-color: var(--acc); background: var(--acc-soft); }
   .icon-btn:active { transform: scale(.9); }
   .icon-btn svg { transition: transform .7s var(--ease); }
   .theme-btn:hover svg { transform: rotate(-40deg) scale(1.08); }
+
+  /* Toggle de idioma (mesma anatomia do LangSwitch da Athenas, no roxo) */
+  .lang-switch { position: relative; display: inline-flex; flex: none; align-items: center; justify-content: space-between; width: 84px; height: 44px; padding: 0 13px; border: 1px solid var(--line2); border-radius: 999px; transition: border-color .3s, background-color .3s; }
+  .lang-switch:hover { border-color: var(--acc); background: var(--acc-soft); }
+  .ls-end { width: 18px; text-align: center; font-size: 10px; font-weight: 700; letter-spacing: .04em; color: var(--mut); }
+  .ls-knob { position: absolute; top: 4px; left: 4px; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--acc); color: var(--on-acc); font-size: 11px; font-weight: 700; letter-spacing: .04em; box-shadow: 0 4px 12px color-mix(in srgb, var(--acc) 45%, transparent); transition: left .35s cubic-bezier(.3, 1.4, .4, 1); }
+  .lang-switch[data-current="en"] .ls-knob { left: calc(100% - 38px); }
+  .lang-switch.is-switching .ls-knob { left: calc(100% - 38px); }
+  .lang-switch[data-current="en"].is-switching .ls-knob { left: 4px; }
 
   /* Ícone do tema: sol no dark, lua no light */
   .theme-btn .i-moon { display: none; }
@@ -464,7 +472,7 @@
 }
 
 @media (max-width: 1020px) {
-  .nav-links, .clock, .nav-cta { display: none; }
+  .nav-links, .nav-cta { display: none; }
 }
 
 @media (min-width: 1021px) {

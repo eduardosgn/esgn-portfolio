@@ -3,39 +3,40 @@ import LiveSiteCard from './LiveSiteCard.astro';
 import WorkCard from './WorkCard.astro';
 import ArchiveRow from './ArchiveRow.astro';
 import Icon from './Icon.astro';
-import { liveSites, featuredWorks, works, archive, contact } from '../data/content';
+import { contact, getContent } from '../data/content';
+
+const t = getContent(Astro.currentLocale);
+const w = t.works;
 ---
 
 <section class="sec wrap" id="trabalhos" aria-labelledby="t-trabalhos" data-tilt-zone>
   <div class="sec-head rv">
     <span class="sec-idx">(01)</span>
-    <h2 class="title sec-title" id="t-trabalhos">Trabalhos<br />selecionados</h2>
-    <p class="sec-aside">
-      Webapps, dashboards e redesigns de sites, do wireframe ao protótipo de alta fidelidade. Cada projeto abre no Behance ou no site no ar.
-    </p>
+    <h2 class="title sec-title" id="t-trabalhos">{w.title[0]}<br />{w.title[1]}</h2>
+    <p class="sec-aside">{w.aside}</p>
   </div>
 
-  <div class="live-head rv"><span class="live-label"><span class="pulse"></span>No ar agora</span><span>Front-end em produção</span></div>
+  <div class="live-head rv"><span class="live-label"><span class="pulse"></span>{w.liveLabel}</span><span>{w.liveAside}</span></div>
   <div class="live-grid">
-    {liveSites.map((s) => <LiveSiteCard {...s} />)}
+    {w.liveSites.map((s) => <LiveSiteCard {...s} badge={w.liveBadge} />)}
   </div>
 
-  <div class="live-head rv"><span class="live-label">Behance</span><span>Estudos de caso de UX/UI</span></div>
+  <div class="live-head rv"><span class="live-label">Behance</span><span>{w.behanceAside}</span></div>
   <div class="works-feat">
-    {featuredWorks.map((w) => <WorkCard {...w} featured />)}
+    {w.featured.map((item) => <WorkCard {...item} cta={w.cardCta} featured />)}
   </div>
   <div class="works-grid">
-    {works.map((w) => <WorkCard {...w} />)}
+    {w.grid.map((item) => <WorkCard {...item} cta={w.cardCta} />)}
   </div>
 
   <div class="archive">
-    <div class="archive-head"><span>Arquivo</span><span>Landing pages, motion e social media</span></div>
-    {archive.map((a) => <ArchiveRow {...a} />)}
+    <div class="archive-head"><span>{w.archiveLabel}</span><span>{w.archiveAside}</span></div>
+    {w.archive.map((a) => <ArchiveRow {...a} />)}
   </div>
 
   <div class="works-more">
     <a class="btn" href={contact.behance} target="_blank" rel="noopener">
-      <span class="roll"><span>Ver tudo no Behance</span><span aria-hidden="true">Ver tudo no Behance</span></span>
+      <span class="roll"><span>{w.more}</span><span aria-hidden="true">{w.more}</span></span>
       <Icon name="arrow-ne" class="i-ne" />
     </a>
   </div>

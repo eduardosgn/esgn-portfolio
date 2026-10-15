@@ -1,16 +1,19 @@
 ---
 import Icon from './Icon.astro';
 import Clock from './Clock.astro';
-import { navLinks, contact } from '../data/content';
+import LangSwitch from './LangSwitch.astro';
+import { contact, getContent } from '../data/content';
+
+const t = getContent(Astro.currentLocale);
 ---
 
 <header class="nav">
   <div class="wrap nav-in">
-    <a class="logo" href="#topo" aria-label="Eduardo Nascimento, voltar ao início" data-logo>esgn<span class="caret-l" aria-hidden="true">_</span></a>
-    <nav aria-label="Principal">
+    <a class="logo" href="#topo" aria-label={t.a11y.logo} data-logo>esgn<span class="caret-l" aria-hidden="true">_</span></a>
+    <nav aria-label={t.a11y.mainNav}>
       <ul class="nav-links">
         {
-          navLinks.map((l) => (
+          t.nav.links.map((l) => (
             <li>
               <a class="nav-link" href={l.href}>
                 <span class="roll">
@@ -25,22 +28,32 @@ import { navLinks, contact } from '../data/content';
       </ul>
     </nav>
     <div class="nav-right">
-      <span class="clock"><span class="pulse"></span>{contact.location}<Clock blink /></span>
-      <button class="icon-btn theme-btn js-only" type="button" aria-label="Ativar modo claro" title="Ativar modo claro" data-theme-toggle>
+      <LangSwitch />
+      <button
+        class="icon-btn theme-btn js-only"
+        type="button"
+        aria-label={t.a11y.themeToLight}
+        title={t.a11y.themeToLight}
+        data-theme-toggle
+        data-label-light={t.a11y.themeToLight}
+        data-label-dark={t.a11y.themeToDark}
+      >
         <Icon name="sun" size={18} class="i-sun" />
         <Icon name="moon" size={18} class="i-moon" />
       </button>
       <a class="btn btn-sm btn-solid nav-cta" href="#contato">
-        <span class="roll"><span>Vamos conversar</span><span aria-hidden="true">Vamos conversar</span></span>
+        <span class="roll"><span>{t.nav.cta}</span><span aria-hidden="true">{t.nav.cta}</span></span>
       </a>
       <button
         class="icon-btn menu-btn"
         type="button"
-        aria-label="Abrir menu"
+        aria-label={t.a11y.menuOpen}
         aria-expanded="false"
         aria-controls="menu-mobile"
         popovertarget="menu-mobile"
         data-menu-btn
+        data-label-open={t.a11y.menuOpen}
+        data-label-close={t.a11y.menuClose}
       >
         <Icon name="menu" size={18} class="i-menu" />
         <Icon name="close" size={18} class="i-close" />
@@ -48,9 +61,9 @@ import { navLinks, contact } from '../data/content';
     </div>
   </div>
   <div class="mmenu" id="menu-mobile" popover>
-    <nav class="mm-links" aria-label="Menu">
+    <nav class="mm-links" aria-label={t.a11y.menuNav}>
       {
-        navLinks.map((l) => (
+        t.nav.links.map((l) => (
           <a class="mm-link" href={l.href}>
             {l.menuLabel}
             <sup>{l.n}</sup>
@@ -59,7 +72,7 @@ import { navLinks, contact } from '../data/content';
       }
     </nav>
     <div class="mm-foot">
-      <span class="status"><span class="pulse"></span>Aberto a vagas remotas</span>
+      <span class="status"><span class="pulse"></span>{t.status}</span>
       <a class="u" href={`mailto:${contact.email}`}>{contact.email}</a>
       <span>{contact.location}<Clock /></span>
     </div>
@@ -92,7 +105,7 @@ import { navLinks, contact } from '../data/content';
 
   const syncThemeUi = () => {
     const dark = root.dataset.theme !== 'light';
-    const label = dark ? 'Ativar modo claro' : 'Ativar modo escuro';
+    const label = (dark ? themeBtn?.dataset.labelLight : themeBtn?.dataset.labelDark) ?? '';
     themeBtn?.setAttribute('aria-label', label);
     themeBtn?.setAttribute('title', label);
     themeMeta?.setAttribute('content', dark ? '#0A0A0B' : '#F4F4F2');
@@ -135,7 +148,7 @@ import { navLinks, contact } from '../data/content';
     menu.addEventListener('toggle', (e) => {
       const open = (e as ToggleEvent).newState === 'open';
       menuBtn.setAttribute('aria-expanded', String(open));
-      menuBtn.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+      menuBtn.setAttribute('aria-label', (open ? menuBtn.dataset.labelClose : menuBtn.dataset.labelOpen) ?? '');
     });
     menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => menu.hidePopover()));
     matchMedia('(min-width: 1021px)').addEventListener('change', (e) => {

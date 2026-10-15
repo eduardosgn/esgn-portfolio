@@ -1,24 +1,26 @@
 ---
 import ExperienceItem from './ExperienceItem.astro';
-import { experiences, education } from '../data/content';
+import { getContent } from '../data/content';
+
+const t = getContent(Astro.currentLocale);
 ---
 
 <section class="sec sec-line" id="experiencia" aria-labelledby="t-xp">
   <div class="wrap">
     <div class="sec-head rv">
       <span class="sec-idx">(04)</span>
-      <h2 class="title sec-title" id="t-xp">Experiência</h2>
-      <p class="sec-aside">Do design gráfico ao Product Design, sempre perto de quem constrói.</p>
+      <h2 class="title sec-title" id="t-xp">{t.experience.title}</h2>
+      <p class="sec-aside">{t.experience.aside}</p>
     </div>
     <div class="xp">
-      {experiences.map((x, i) => <ExperienceItem {...x} open={i === 0} />)}
+      {t.experience.items.map((x, i) => <ExperienceItem {...x} open={i === 0} />)}
     </div>
 
     <div class="edu">
-      <h3 class="edu-h">Formação</h3>
+      <h3 class="edu-h">{t.experience.eduTitle}</h3>
       <ul class="edu-grid rv">
         {
-          education.map((e) => (
+          t.experience.education.map((e) => (
             <li class="edu-card">
               <span class="edu-years">{e.years}</span>
               <span class="title edu-course">{e.course}</span>

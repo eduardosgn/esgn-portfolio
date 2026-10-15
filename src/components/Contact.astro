@@ -1,20 +1,23 @@
 ---
 import Icon from './Icon.astro';
-import { contact } from '../data/content';
+import { contact, getContent } from '../data/content';
+
+const t = getContent(Astro.currentLocale);
+const c = t.contact;
 ---
 
 <section class="contact" id="contato" aria-labelledby="t-contato">
   <div class="wrap">
-    <span class="sec-idx">(05) Contato</span>
-    <h2 class="title contact-title rv" id="t-contato">Tem um projeto<br />em <em>mente?</em></h2>
+    <span class="sec-idx">{c.idx}</span>
+    <h2 class="title contact-title rv" id="t-contato">{c.title}<br />{c.titleEmPrefix}<em>{c.titleEm}</em></h2>
     <div class="contact-grid">
       <div class="mail-col rv">
-        <p>Aberto a vagas remotas e projetos freelance de produto, UX/UI e front-end. Me manda um e-mail:</p>
+        <p>{c.text}</p>
         <a class="mail u" href={`mailto:${contact.email}`}>{contact.email}</a>
-        <button class="btn btn-sm copy-btn js-only" type="button" data-copy={contact.email}>
+        <button class="btn btn-sm copy-btn js-only" type="button" data-copy={contact.email} data-label-done={c.copied}>
           <Icon name="check" class="i-check" />
           <Icon name="copy" class="i-copy" />
-          <span aria-live="polite" data-copy-label>Copiar e-mail</span>
+          <span aria-live="polite" data-copy-label>{c.copy}</span>
         </button>
       </div>
       <div class="links rv">
@@ -27,7 +30,7 @@ import { contact } from '../data/content';
           <span class="lnk-meta"><span class="lnk-url">{contact.behanceLabel}</span><Icon name="arrow-ne" size={18} /></span>
         </a>
         <a class="lnk" href={contact.cv} target="_blank" rel="noopener">
-          <span>Currículo</span>
+          <span>{c.cv}</span>
           <span class="lnk-meta"><span class="lnk-url">PDF</span><Icon name="download" size={18} class="i-dl" /></span>
         </a>
       </div>
@@ -38,6 +41,7 @@ import { contact } from '../data/content';
 <script>
   const btn = document.querySelector<HTMLButtonElement>('[data-copy]');
   const label = btn?.querySelector('[data-copy-label]');
+  const idle = label?.textContent ?? '';
   let timer = 0;
 
   btn?.addEventListener('click', async () => {
@@ -45,11 +49,11 @@ import { contact } from '../data/content';
     try {
       await navigator.clipboard.writeText(email);
       btn.classList.add('is-copied');
-      if (label) label.textContent = 'E-mail copiado!';
+      if (label) label.textContent = btn.dataset.labelDone ?? '';
       clearTimeout(timer);
       timer = window.setTimeout(() => {
         btn.classList.remove('is-copied');
-        if (label) label.textContent = 'Copiar e-mail';
+        if (label) label.textContent = idle;
       }, 2200);
     } catch {
       window.location.href = `mailto:${email}`;

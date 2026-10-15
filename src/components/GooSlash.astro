@@ -34,11 +34,13 @@
 
     // Posiciona a barra entre o "e" e o "n" de "Nascimento", compensando a inclinação
     const measure = () => {
-      const top = name.offsetTop - name.offsetHeight * 0.06;
-      const height = name.offsetHeight * 1.12;
+      // Medido em relação ao hero (a camada do goo cobre a seção inteira, não só o container)
+      const hr = hero.getBoundingClientRect();
+      const nr = name.getBoundingClientRect();
+      const top = nr.top - hr.top - nr.height * 0.06;
+      const height = nr.height * 1.12;
       slash.style.top = top + 'px';
       slash.style.height = height + 'px';
-      const hr = hero.getBoundingClientRect();
       const ar = anchor.getBoundingClientRect();
       const lr = (anchor.closest('.line') ?? anchor).getBoundingClientRect();
       const dy = lr.top + lr.height * 0.42 - hr.top - (top + height / 2);

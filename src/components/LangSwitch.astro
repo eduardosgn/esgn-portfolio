@@ -1,0 +1,55 @@
+---
+// Mesma anatomia do LangSwitch da Athenas: pílula com PT/EN nas pontas e bolinha que desliza.
+// É um link para a outra versão da página, então funciona sem JS.
+import { getContent, getLang, LANGS } from '../data/content';
+
+const t = getContent(Astro.currentLocale);
+const current = LANGS.find((l) => l.code === getLang(Astro.currentLocale))!;
+const next = LANGS.find((l) => l.code !== current.code)!;
+---
+
+<a
+  class="lang-switch"
+  href={next.path}
+  hreflang={next.htmlLang}
+  data-lang-switch
+  data-current={current.code}
+  data-next-label={next.label}
+  aria-label={`${t.a11y.language}: ${current.name}. ${t.a11y.switchTo} ${next.name}`}
+  title={`${t.a11y.switchTo} ${next.name}`}
+>
+  {LANGS.map((l) => <span class="ls-end" aria-hidden="true">{l.label}</span>)}
+  <span class="ls-knob" aria-hidden="true">{current.label}</span>
+</a>
+
+<script>
+  // Chegando com #secao na URL (ex.: vindo da troca de idioma), garante a rolagem até ela
+  if (location.hash && scrollY === 0) {
+    const target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if (target) requestAnimationFrame(() => target.scrollIntoView({ behavior: 'instant' }));
+  }
+
+  // Desliza a bolinha antes de trocar de página e mantém a seção que está na tela
+  document.querySelectorAll<HTMLAnchorElement>('[data-lang-switch]').forEach((link) => {
+    link.addEventListener('click', (e) => {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+      e.preventDefault();
+
+      const navH = document.querySelector('.nav')?.getBoundingClientRect().height ?? 0;
+      let hash = '';
+      document.querySelectorAll<HTMLElement>('main section[id]').forEach((s) => {
+        if (s.getBoundingClientRect().top <= navH + 1) hash = '#' + s.id;
+      });
+      const url = link.pathname + hash;
+
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        location.href = url;
+        return;
+      }
+      link.classList.add('is-switching');
+      const knob = link.querySelector('.ls-knob');
+      if (knob) knob.textContent = link.dataset.nextLabel ?? '';
+      setTimeout(() => (location.href = url), 260);
+    });
+  });
+</script>
