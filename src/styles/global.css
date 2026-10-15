@@ -221,10 +221,12 @@
   .status { display: inline-flex; align-items: center; gap: 10px; font-size: 12px; letter-spacing: .03em; color: var(--mut); }
   .pulse { position: relative; display: inline-block; flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--acc); }
   .pulse::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: var(--acc); animation: ping 2.2s cubic-bezier(0, 0, .2, 1) infinite; }
-  .hero-name { margin-top: clamp(28px, 4vw, 64px); font-size: clamp(52px, 15.5vw, 250px); font-weight: 700; letter-spacing: -.055em; line-height: .9; white-space: nowrap; }
+  /* Teto de 228px: com 250px "Nascimento." + recuo passavam do container de 1440px */
+  .hero-name { margin-top: clamp(28px, 4vw, 64px); font-size: clamp(52px, 15.5vw, 228px); font-weight: 700; letter-spacing: -.055em; line-height: .9; white-space: nowrap; }
   .line { display: block; overflow: hidden; padding-bottom: .07em; margin-bottom: -.07em; }
   .line > span { display: inline-block; }
-  .line-2 { padding-left: 9vw; }
+  /* Limitado a 9% de 1440px: acima disso a fonte para de crescer e o "." vazava */
+  .line-2 { padding-left: min(9vw, 130px); }
   .hero-bottom { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(440px, 100%), 1fr)); gap: clamp(32px, 4vw, 72px); align-items: end; margin-top: clamp(36px, 4.5vw, 72px); padding-top: clamp(28px, 3vw, 40px); border-top: 1px solid var(--line); }
   .lead { max-width: 54ch; font-size: clamp(15px, 1.25vw, 18px); line-height: 1.7; }
   .lead em { font-style: normal; color: var(--acc); }
@@ -467,6 +469,9 @@
 
 @media (min-width: 1021px) {
   .menu-btn, .mmenu { display: none !important; }
+  /* Desktop: hero mais perto da nav e nome mais colado nas pills */
+  .hero { padding-top: clamp(20px, 2vw, 36px); }
+  .hero-name { margin-top: clamp(10px, 1.2vw, 24px); }
 }
 
 @media (min-width: 641px) and (max-width: 960px) {

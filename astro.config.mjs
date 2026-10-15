@@ -5,7 +5,8 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://esgn-design.com',
+  // Trocar para https://esgn-design.com quando o domínio estiver ligado na Vercel
+  site: 'https://esgn-portfolio.vercel.app',
   output: 'static',
   vite: {
     plugins: [tailwindcss()],
