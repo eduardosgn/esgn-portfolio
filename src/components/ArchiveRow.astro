@@ -2,17 +2,15 @@
 import Icon from './Icon.astro';
 
 interface Props {
-  index: string;
   title: string;
   type: string;
   href: string;
 }
 
-const { index, title, type, href } = Astro.props;
+const { title, type, href } = Astro.props;
 ---
 
 <a class="row rv" href={href} target="_blank" rel="noopener">
-  <span class="row-idx">{index}</span>
   <span class="row-main"><span class="title row-title">{title}</span><span class="row-type">{type}</span></span>
   <span class="row-arrow" aria-hidden="true"><Icon name="arrow-ne" size={20} /></span>
 </a>

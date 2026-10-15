@@ -107,7 +107,7 @@ export interface Content {
     liveSites: LiveSite[];
     featured: Work[];
     grid: Work[];
-    archive: { index: string; title: string; type: string; href: string }[];
+    archive: { title: string; type: string; href: string }[];
   };
   about: {
     title: string;
@@ -263,10 +263,10 @@ const pt: Content = {
       },
     ],
     archive: [
-      { index: '08', title: 'Extensão Criação de Startups', type: 'Landing page', href: 'https://www.behance.net/gallery/116039019/Landing-Page-Extensao-Criacao-de-Startups' },
-      { index: '09', title: 'Economia e Investimentos', type: 'Landing page', href: 'https://www.behance.net/gallery/116049445/Landing-Page-Economia-e-Investimentos' },
-      { index: '10', title: 'Roçadeiras Tekna', type: 'Animação', href: 'https://www.behance.net/gallery/87233893/Animacao-Rocadeiras-Tekna' },
-      { index: '11', title: 'Techno Party Posts', type: 'Social media', href: 'https://www.behance.net/gallery/80409631/Social-Media-Electronic-Parties' },
+      { title: 'Extensão Criação de Startups', type: 'Landing page', href: 'https://www.behance.net/gallery/116039019/Landing-Page-Extensao-Criacao-de-Startups' },
+      { title: 'Economia e Investimentos', type: 'Landing page', href: 'https://www.behance.net/gallery/116049445/Landing-Page-Economia-e-Investimentos' },
+      { title: 'Roçadeiras Tekna', type: 'Animação', href: 'https://www.behance.net/gallery/87233893/Animacao-Rocadeiras-Tekna' },
+      { title: 'Techno Party Posts', type: 'Social media', href: 'https://www.behance.net/gallery/80409631/Social-Media-Electronic-Parties' },
     ],
   },
   about: {
