@@ -8,7 +8,7 @@ import { contact, getContent, getLang, LANGS } from '../data/content';
 const t = getContent(Astro.currentLocale);
 const lang = LANGS.find((l) => l.code === getLang(Astro.currentLocale))!;
 const { title, description } = t.meta;
-const site = Astro.site ?? new URL('https://esgn-portfolio.vercel.app');
+const site = Astro.site ?? new URL('https://www.esgn-design.site');
 const canonical = new URL(Astro.url.pathname, site).href;
 const ogImage = new URL('/og.png', site).href;
 const alternates = LANGS.map((l) => ({ hreflang: l.htmlLang, href: new URL(l.path, site).href }));
