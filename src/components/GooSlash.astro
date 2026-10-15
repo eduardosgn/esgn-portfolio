@@ -31,6 +31,7 @@
   if (hero && name && anchor && slash && blob && trail) {
     const g = { tx: 0, ty: 0, bx: 0, by: 0, cx: 0, cy: 0, sc: 0, tsc: 0, mx: 0, my: 0, sx: 0, sy: 0, idle: true };
     const TAN = Math.tan((18 * Math.PI) / 180);
+    const TRAIL_MAX = 28;
 
     // Posiciona a barra entre o "e" e o "n" de "Nascimento", compensando a inclinação
     const measure = () => {
@@ -68,6 +69,15 @@
         g.by += (g.ty - g.by) * 0.2;
         g.cx += (g.tx - g.cx) * 0.09;
         g.cy += (g.ty - g.cy) * 0.09;
+        // Rastro preso a no máximo TRAIL_MAX da bolinha principal: longe demais ele sai do
+        // alcance do goo e some, e ao reencostar quando o mouse para "estoura" num flash
+        const tdx = g.cx - g.bx;
+        const tdy = g.cy - g.by;
+        const td = Math.hypot(tdx, tdy);
+        if (td > TRAIL_MAX) {
+          g.cx = g.bx + (tdx / td) * TRAIL_MAX;
+          g.cy = g.by + (tdy / td) * TRAIL_MAX;
+        }
         g.sc += (g.tsc - g.sc) * 0.14;
         const sc = g.sc < 0.003 ? 0 : g.sc;
         blob.style.transform = `translate3d(${g.bx.toFixed(1)}px,${g.by.toFixed(1)}px,0) scale(${sc.toFixed(3)})`;
