@@ -1,0 +1,34 @@
+---
+import { Picture } from 'astro:assets';
+import type { LiveSite } from '../data/content';
+import Icon from './Icon.astro';
+
+type Props = LiveSite;
+
+const { name, url, domain, description, image } = Astro.props;
+---
+
+<a class="live-card rv tilt" href={url} target="_blank" rel="noopener">
+  <div class="browser-bar">
+    <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+    <span class="browser-url"><Icon name="lock" size={11} />{domain}</span>
+  </div>
+  <div class="live-body">
+    <Picture
+      class="live-bg"
+      src={image}
+      alt=""
+      formats={['avif', 'webp']}
+      widths={[...[480, 720, 1080].filter((w) => w < image.width), image.width]}
+      sizes="(max-width: 960px) calc(100vw - 32px), (max-width: 1440px) 48vw, 680px"
+      loading="lazy"
+      decoding="async"
+    />
+    <span class="live-arrow" aria-hidden="true"><Icon name="arrow-ne" /></span>
+    <div class="live-info">
+      <span class="live-pill"><span class="pulse"></span>site no ar</span>
+      <h3 class="title live-name">{name}</h3>
+      <p class="live-desc">{description}</p>
+    </div>
+  </div>
+</a>

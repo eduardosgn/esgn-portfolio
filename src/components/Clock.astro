@@ -1,0 +1,10 @@
+---
+interface Props {
+  blink?: boolean;
+  suffix?: string;
+}
+
+const { blink = false, suffix = '' } = Astro.props;
+---
+
+<span class="js-only"> · <span data-hh>--</span><span class={blink ? 'colon' : undefined}>:</span><span data-mm>--</span>{suffix}</span>

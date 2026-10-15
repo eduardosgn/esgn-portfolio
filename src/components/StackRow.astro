@@ -1,0 +1,22 @@
+---
+import type { StackGroup } from '../data/content';
+
+type Props = StackGroup;
+
+const { label, items, note } = Astro.props;
+---
+
+<div class="stack-row rv">
+  <span class="stack-label"><b>~/</b>{label}</span>
+  <ul class="stack-items">
+    {
+      items.map((it) => (
+        <li class:list={['pill', { 'pill-soft': it.soft }]}>
+          {it.name}
+          {it.level && <small>{it.level}</small>}
+        </li>
+      ))
+    }
+  </ul>
+  {note && <p class="stack-note">{note}</p>}
+</div>

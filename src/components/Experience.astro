@@ -1,0 +1,32 @@
+---
+import ExperienceItem from './ExperienceItem.astro';
+import { experiences, education } from '../data/content';
+---
+
+<section class="sec sec-line" id="experiencia" aria-labelledby="t-xp">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-idx">(04)</span>
+      <h2 class="title sec-title" id="t-xp">Experiência</h2>
+      <p class="sec-aside">Do design gráfico ao Product Design, sempre perto de quem constrói.</p>
+    </div>
+    <div class="xp">
+      {experiences.map((x, i) => <ExperienceItem {...x} open={i === 0} />)}
+    </div>
+
+    <div class="edu">
+      <h3 class="edu-h">Formação</h3>
+      <ul class="edu-grid rv">
+        {
+          education.map((e) => (
+            <li class="edu-card">
+              <span class="edu-years">{e.years}</span>
+              <span class="title edu-course">{e.course}</span>
+              <span class="edu-school">{e.school}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>

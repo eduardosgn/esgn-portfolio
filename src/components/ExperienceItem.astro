@@ -1,0 +1,23 @@
+---
+import type { Experience } from '../data/content';
+
+interface Props extends Experience {
+  open?: boolean;
+}
+
+const { period, company, role, bullets, open = false } = Astro.props;
+---
+
+<details class="xp-item" name="experiencia" open={open}>
+  <summary class="xp-btn">
+    <span class="xp-period">{period}</span>
+    <h3 class="title xp-company">{company}</h3>
+    <span class="xp-role">{role}</span>
+    <span class="xp-plus" aria-hidden="true"></span>
+  </summary>
+  <div class="xp-body">
+    <ul class="xp-list">
+      {bullets.map((b) => <li>{b}</li>)}
+    </ul>
+  </div>
+</details>

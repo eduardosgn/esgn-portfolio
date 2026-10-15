@@ -1,0 +1,38 @@
+---
+import GooSlash from './GooSlash.astro';
+import CodeCard from './CodeCard.astro';
+import Icon from './Icon.astro';
+import { heroTags, contact } from '../data/content';
+---
+
+<section class="hero wrap" aria-labelledby="hero-title" data-hero>
+  <GooSlash />
+  <div class="hero-meta">
+    <ul class="hero-tags" aria-label="Áreas">
+      {heroTags.map((t) => <li class="tag">{t}</li>)}
+    </ul>
+    <span class="status"><span class="pulse"></span>Aberto a vagas remotas</span>
+  </div>
+  <h1 class="title hero-name" id="hero-title" data-hero-name>
+    <span class="line"><span>Eduardo</span></span>
+    <span class="line line-2"><span>Nascime<span class="slash-anchor"></span>nto<span class="acc">.</span></span></span>
+  </h1>
+  <div class="hero-bottom">
+    <div>
+      <p class="lead">
+        Product Designer &amp; UX/UI com 6+ anos criando produtos digitais para fintechs, logística e plataformas com IA, <em>do conceito ao código.</em>
+      </p>
+      <div class="btn-row">
+        <a class="btn btn-solid" href="#trabalhos">
+          <span class="roll"><span>Ver trabalhos</span><span aria-hidden="true">Ver trabalhos</span></span>
+          <Icon name="arrow-down" class="i-dn" />
+        </a>
+        <a class="btn" href={contact.cv} target="_blank" rel="noopener">
+          <span class="roll"><span>Baixar CV</span><span aria-hidden="true">Baixar CV</span></span>
+          <Icon name="download" class="i-dn" />
+        </a>
+      </div>
+    </div>
+    <CodeCard />
+  </div>
+</section>

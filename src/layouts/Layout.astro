@@ -1,0 +1,75 @@
+---
+import '../styles/global.css';
+import interTight from '../../node_modules/@fontsource-variable/inter-tight/files/inter-tight-latin-wght-normal.woff2?url';
+import jetbrainsMono from '../../node_modules/@fontsource-variable/jetbrains-mono/files/jetbrains-mono-latin-wght-normal.woff2?url';
+import { contact } from '../data/content';
+
+const title = 'Eduardo Nascimento | Portfolio';
+const description =
+  'Product Designer & UX/UI com 6+ anos criando produtos digitais para fintechs, logística e plataformas com IA, do conceito ao código.';
+const site = Astro.site ?? new URL('https://esgn-design.com');
+const canonical = new URL(Astro.url.pathname, site).href;
+const ogImage = new URL('/og.png', site).href;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Eduardo Nascimento',
+  jobTitle: 'Product Designer',
+  email: `mailto:${contact.email}`,
+  url: site.href,
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Barra Velha',
+    addressRegion: 'SC',
+    addressCountry: 'BR',
+  },
+  sameAs: [contact.linkedin, contact.behance],
+};
+---
+
+<!doctype html>
+<html lang="pt-BR" data-theme="dark" class="no-js">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0A0A0B" />
+    <script is:inline>
+      (function () {
+        var d = document.documentElement;
+        d.classList.remove('no-js');
+        d.classList.add('js');
+        try {
+          var t = localStorage.getItem('theme');
+          if (t === 'light' || t === 'dark') d.setAttribute('data-theme', t);
+          if (t === 'light') document.querySelector('meta[name="theme-color"]').setAttribute('content', '#F4F4F2');
+        } catch (e) {}
+      })();
+    </script>
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preload" href={interTight} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={jetbrainsMono} as="font" type="font/woff2" crossorigin />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Eduardo Nascimento, Product Designer" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

@@ -1,0 +1,48 @@
+---
+import Icon from './Icon.astro';
+---
+
+<button class="to-top" type="button" aria-label="Voltar ao topo" data-to-top>
+  <span class="to-top-in"><Icon name="arrow-up" size={18} /></span>
+  <span class="to-top-tip" aria-hidden="true">Voltar ao topo</span>
+</button>
+
+<script>
+  const btn = document.querySelector<HTMLButtonElement>('[data-to-top]');
+  const hero = document.querySelector<HTMLElement>('[data-hero]');
+  const foot = document.querySelector<HTMLElement>('[data-foot]');
+
+  if (btn) {
+    let raf = 0;
+    let on = false;
+
+    const update = () => {
+      raf = 0;
+      const vh = innerHeight;
+      // Aparece quando o hero sai da tela e some antes do rodapé entrar
+      const pastHero = hero ? hero.getBoundingClientRect().bottom < vh * 0.15 : scrollY > vh;
+      const beforeFoot = foot ? foot.getBoundingClientRect().top > vh + 140 : true;
+      const next = pastHero && beforeFoot;
+      if (next !== on) {
+        on = next;
+        btn.classList.toggle('is-on', on);
+      }
+      const max = document.documentElement.scrollHeight - vh;
+      const p = max > 0 ? Math.min(1, Math.max(0, scrollY / max)) : 0;
+      btn.style.setProperty('--p', p.toFixed(4));
+    };
+
+    const schedule = () => {
+      if (!raf) raf = requestAnimationFrame(update);
+    };
+    addEventListener('scroll', schedule, { passive: true });
+    addEventListener('resize', schedule, { passive: true });
+    schedule();
+
+    btn.addEventListener('click', () => {
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+      document.querySelector<HTMLElement>('[data-logo]')?.focus({ preventScroll: true });
+    });
+  }
+</script>

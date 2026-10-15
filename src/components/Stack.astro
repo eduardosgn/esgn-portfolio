@@ -1,0 +1,17 @@
+---
+import StackRow from './StackRow.astro';
+import { stack } from '../data/content';
+---
+
+<section class="sec sec-line" id="stack" aria-labelledby="t-stack">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-idx">(03)</span>
+      <h2 class="title sec-title" id="t-stack">Stack</h2>
+      <p class="sec-aside">Design que já nasce pensando no código. O que uso no dia a dia e o que estou aprofundando.</p>
+    </div>
+    <div class="stack">
+      {stack.map((g) => <StackRow {...g} />)}
+    </div>
+  </div>
+</section>

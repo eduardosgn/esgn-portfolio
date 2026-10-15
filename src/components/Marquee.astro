@@ -1,0 +1,24 @@
+---
+interface Props {
+  items: { label: string; outline?: boolean }[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="marquee" aria-hidden="true">
+  <div class="mq-track">
+    {
+      [0, 1].map(() => (
+        <div class="mq-group">
+          {items.map((it) => (
+            <Fragment>
+              <span class={it.outline ? 'mq-o' : undefined}>{it.label}</span>
+              <span class="mq-sep">/</span>
+            </Fragment>
+          ))}
+        </div>
+      ))
+    }
+  </div>
+</div>

@@ -1,0 +1,54 @@
+---
+import { Image } from 'astro:assets';
+import photo from '../assets/images/eduardo.jpg';
+import { facts, services } from '../data/content';
+---
+
+<section class="sec sec-line" id="sobre" aria-labelledby="t-sobre">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-idx">(02)</span>
+      <h2 class="title sec-title" id="t-sobre">Sobre</h2>
+      <p class="sec-aside">Product Designer que fala a língua do front-end.</p>
+    </div>
+    <div class="about-grid">
+      <div class="about-left rv">
+        <figure class="photo">
+          <Image src={photo} alt="Foto de Eduardo Nascimento sorrindo" width={400} height={400} densities={[1]} formats={['avif', 'webp']} loading="lazy" decoding="async" />
+        </figure>
+        <p class="statement">Desenho interfaces pensando em quem usa,<br /><em>e em quem vai codar.</em></p>
+      </div>
+      <div class="rv">
+        <div class="about-text">
+          <p>
+            Sou <strong>Product Designer e UX/UI Designer</strong> com mais de 6 anos de experiência em produtos digitais para fintechs, logística e plataformas de tecnologia com IA, do conceito à entrega, lado a lado com times de desenvolvimento.
+          </p>
+          <p>
+            Trabalho com Design Systems, prototipação em Figma, testes de usabilidade e acessibilidade. E como também programo (<strong>HTML, CSS, JavaScript, Vue.js e React</strong>, com base em Java e Rust), a conversa entre design e engenharia fica bem mais fluida.
+          </p>
+        </div>
+        <dl class="facts">
+          {
+            facts.map((f) => (
+              <div class="fact">
+                <dt>{f.label}</dt>
+                <dd>{f.value}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+    </div>
+    <div class="services">
+      {
+        services.map((s, i) => (
+          <article class="svc rv">
+            <span class="svc-n">{String(i + 1).padStart(2, '0')} /</span>
+            <h3 class="title svc-t">{s.title}</h3>
+            <p>{s.text}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

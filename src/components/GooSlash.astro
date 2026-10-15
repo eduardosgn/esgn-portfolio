@@ -1,0 +1,121 @@
+---
+// Barra "/" do hero com cursor líquido (filtro goo). Inspirado no mkvision.studio.
+// O script mede a posição do marcador .slash-anchor dentro do h1 do hero.
+---
+
+<div class="goo-layer" aria-hidden="true">
+  <svg class="goo-defs" width="0" height="0" focusable="false">
+    <defs>
+      <filter id="goo-f" x="-10%" y="-10%" width="120%" height="120%">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="11" result="blur"></feGaussianBlur>
+        <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 24 -11" result="goo"></feColorMatrix>
+        <feComposite in="SourceGraphic" in2="goo" operator="atop"></feComposite>
+      </filter>
+    </defs>
+  </svg>
+  <div class="goo">
+    <span class="slash-pos" data-slash><span class="slash"></span></span>
+    <span class="blob blob-trail" data-trail></span>
+    <span class="blob blob-main" data-blob></span>
+  </div>
+</div>
+
+<script>
+  const hero = document.querySelector<HTMLElement>('[data-hero]');
+  const name = hero?.querySelector<HTMLElement>('[data-hero-name]');
+  const anchor = hero?.querySelector<HTMLElement>('.slash-anchor');
+  const slash = hero?.querySelector<HTMLElement>('[data-slash]');
+  const blob = hero?.querySelector<HTMLElement>('[data-blob]');
+  const trail = hero?.querySelector<HTMLElement>('[data-trail]');
+
+  if (hero && name && anchor && slash && blob && trail) {
+    const g = { tx: 0, ty: 0, bx: 0, by: 0, cx: 0, cy: 0, sc: 0, tsc: 0, mx: 0, my: 0, sx: 0, sy: 0, idle: true };
+    const TAN = Math.tan((18 * Math.PI) / 180);
+
+    // Posiciona a barra entre o "e" e o "n" de "Nascimento", compensando a inclinação
+    const measure = () => {
+      const top = name.offsetTop - name.offsetHeight * 0.06;
+      const height = name.offsetHeight * 1.12;
+      slash.style.top = top + 'px';
+      slash.style.height = height + 'px';
+      const hr = hero.getBoundingClientRect();
+      const ar = anchor.getBoundingClientRect();
+      const lr = (anchor.closest('.line') ?? anchor).getBoundingClientRect();
+      const dy = lr.top + lr.height * 0.42 - hr.top - (top + height / 2);
+      const centerX = ar.left - hr.left + TAN * dy;
+      slash.style.left = centerX - slash.offsetWidth / 2 + 'px';
+      g.sx = slash.offsetLeft + slash.offsetWidth / 2;
+      g.sy = top + height / 2;
+    };
+
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(hero);
+    ro.observe(name);
+    document.fonts?.ready.then(measure).catch(() => {});
+
+    const mq = (q: string) => matchMedia(q).matches;
+    if (mq('(hover: hover) and (pointer: fine)') && !mq('(prefers-reduced-motion: reduce)')) {
+      hero.classList.add('goo-on');
+
+      const tick = () => {
+        requestAnimationFrame(tick);
+        // Parado e escondido: não escreve estilos
+        if (g.idle && g.tsc === 0 && g.sc < 0.003 && Math.abs(g.mx) < 0.05 && Math.abs(g.my) < 0.05) return;
+        g.bx += (g.tx - g.bx) * 0.2;
+        g.by += (g.ty - g.by) * 0.2;
+        g.cx += (g.tx - g.cx) * 0.09;
+        g.cy += (g.ty - g.cy) * 0.09;
+        g.sc += (g.tsc - g.sc) * 0.14;
+        const sc = g.sc < 0.003 ? 0 : g.sc;
+        blob.style.transform = `translate3d(${g.bx.toFixed(1)}px,${g.by.toFixed(1)}px,0) scale(${sc.toFixed(3)})`;
+        trail.style.transform = `translate3d(${g.cx.toFixed(1)}px,${g.cy.toFixed(1)}px,0) scale(${sc.toFixed(3)})`;
+
+        // Efeito ímã: puxa a barra até ~9% da distância do mouse num raio de 420px
+        let mx = 0;
+        let my = 0;
+        if (g.tsc > 0) {
+          const dx = g.tx - g.sx;
+          const dy = g.ty - g.sy;
+          const d = Math.hypot(dx, dy);
+          const R = 420;
+          if (d < R) {
+            const f = (1 - d / R) * 0.09;
+            mx = dx * f;
+            my = dy * f;
+          }
+        }
+        g.mx += (mx - g.mx) * 0.1;
+        g.my += (my - g.my) * 0.1;
+        slash.style.transform = `translate3d(${g.mx.toFixed(2)}px,${g.my.toFixed(2)}px,0)`;
+        g.idle = g.tsc === 0;
+      };
+      requestAnimationFrame(tick);
+
+      hero.addEventListener('pointermove', (e) => {
+        if (e.pointerType !== 'mouse') return;
+        if (hero.offsetWidth < 641) {
+          g.tsc = 0;
+          return;
+        }
+        const r = hero.getBoundingClientRect();
+        const x = e.clientX - r.left;
+        const y = e.clientY - r.top;
+        if (g.sc < 0.05) {
+          g.bx = g.cx = x;
+          g.by = g.cy = y;
+        }
+        g.tx = x;
+        g.ty = y;
+        const el = e.target as Element | null;
+        if (el?.closest('.code-card')) g.tsc = 0;
+        else if (el?.closest('a, button')) g.tsc = 0.32;
+        else g.tsc = 1;
+        g.idle = false;
+      });
+      hero.addEventListener('pointerleave', () => {
+        g.tsc = 0;
+      });
+    }
+  }
+</script>
