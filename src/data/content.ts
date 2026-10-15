@@ -301,7 +301,7 @@ const pt: Content = {
       },
       {
         label: 'processo',
-        items: [{ name: 'Scrum / Kanban' }, { name: 'Design Thinking' }, { name: 'Jira' }, { name: 'Notion' }, { name: 'Trello' }],
+        items: [{ name: 'Scrum / Kanban' }, { name: 'Design Thinking' }, { name: 'Jira' }, { name: 'Bitbucket' }, { name: 'Notion' }, { name: 'Trello' }, { name: 'Slack' }],
       },
       {
         label: 'front-end',
