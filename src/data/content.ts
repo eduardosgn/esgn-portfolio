@@ -382,7 +382,7 @@ const pt: Content = {
       },
       {
         period: 'Mar 2017 - Jun 2018',
-        company: 'Fiep',
+        company: 'FIEP',
         role: 'Estagiário de Design Gráfico',
         bullets: [
           'Estágio na Gerência de Marketing da Federação das Indústrias do Estado do Paraná.',
@@ -605,7 +605,7 @@ const en: Content = {
       },
       {
         period: 'Mar 2017 - Jun 2018',
-        company: 'Fiep',
+        company: 'FIEP',
         role: 'Graphic Design Intern',
         bullets: [
           'Internship in the Marketing department of the Federation of Industries of the State of Paraná.',
