@@ -298,6 +298,14 @@ const pt: Content = {
     aside: 'Design que já nasce pensando no código. O que uso no dia a dia e o que estou aprofundando.',
     groups: [
       {
+        label: 'design',
+        items: [{ name: 'Figma' }, { name: 'FigJam' }, { name: 'Miro' }, { name: 'Photoshop' }, { name: 'Illustrator' }, { name: 'Canva' }],
+      },
+      {
+        label: 'processo',
+        items: [{ name: 'Scrum / Kanban' }, { name: 'Design Thinking' }, { name: 'Jira' }, { name: 'Notion' }, { name: 'Trello' }],
+      },
+      {
         label: 'front-end',
         items: [
           { name: 'HTML', level: 'dia a dia' },
@@ -319,14 +327,6 @@ const pt: Content = {
           { name: 'Rust', level: 'fundamentos', soft: true },
         ],
         note: '// entendo a base e leio código com tranquilidade, mas ainda tenho pouca experiência prática.',
-      },
-      {
-        label: 'design',
-        items: [{ name: 'Figma' }, { name: 'FigJam' }, { name: 'Miro' }, { name: 'Photoshop' }, { name: 'Illustrator' }, { name: 'Canva' }],
-      },
-      {
-        label: 'processo',
-        items: [{ name: 'Scrum / Kanban' }, { name: 'Design Thinking' }, { name: 'Jira' }, { name: 'Notion' }, { name: 'Trello' }],
       },
       {
         label: 'ia',
@@ -527,6 +527,8 @@ const en: Content = {
     title: 'Stack',
     aside: "Design built with code in mind. What I use every day and what I'm going deeper into.",
     groups: [
+      { ...pt.stack.groups[0] },
+      { ...pt.stack.groups[1], label: 'process' },
       {
         label: 'front-end',
         items: [
@@ -550,8 +552,6 @@ const en: Content = {
         ],
         note: '// I understand the basics and read code comfortably, but I still have little hands-on experience.',
       },
-      { ...pt.stack.groups[2] },
-      { ...pt.stack.groups[3], label: 'process' },
       {
         label: 'ai',
         items: [
