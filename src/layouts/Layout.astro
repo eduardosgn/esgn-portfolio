@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import Analytics from '@vercel/analytics/astro';
 import interTight from '../../node_modules/@fontsource-variable/inter-tight/files/inter-tight-latin-wght-normal.woff2?url';
 import jetbrainsMono from '../../node_modules/@fontsource-variable/jetbrains-mono/files/jetbrains-mono-latin-wght-normal.woff2?url';
 import { contact, getContent, getLang, LANGS } from '../data/content';
@@ -74,5 +75,6 @@ const jsonLd = {
   </head>
   <body>
     <slot />
+    <Analytics />
   </body>
 </html>
