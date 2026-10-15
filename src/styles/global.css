@@ -235,7 +235,7 @@
   .line > span { display: inline-block; }
   /* Limitado a 9% de 1440px: acima disso a fonte para de crescer e o "." vazava */
   .line-2 { padding-left: min(9vw, 130px); }
-  .hero-bottom { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(440px, 100%), 1fr)); gap: clamp(32px, 4vw, 72px); align-items: end; margin-top: clamp(36px, 4.5vw, 72px); padding-top: clamp(28px, 3vw, 40px); border-top: 1px solid var(--line); }
+  .hero-bottom { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(440px, 100%), 1fr)); gap: clamp(32px, 4vw, 72px); align-items: start; margin-top: clamp(36px, 4.5vw, 72px); }
   .lead { max-width: 54ch; font-size: clamp(15px, 1.25vw, 18px); line-height: 1.7; }
   .lead em { font-style: normal; color: var(--acc); }
   .btn-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
