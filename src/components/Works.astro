@@ -18,7 +18,7 @@ const w = t.works;
 
   <div class="live-head rv"><span class="live-label"><span class="pulse"></span>{w.liveLabel}</span><span>{w.liveAside}</span></div>
   <div class="live-grid">
-    {w.liveSites.map((s) => <LiveSiteCard {...s} badge={w.liveBadge} />)}
+    {w.liveSites.map((s) => <LiveSiteCard {...s} />)}
   </div>
 
   <div class="live-head rv"><span class="live-label">Behance</span><span>{w.behanceAside}</span></div>

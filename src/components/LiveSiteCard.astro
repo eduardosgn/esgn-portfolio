@@ -3,11 +3,9 @@ import { Picture } from 'astro:assets';
 import type { LiveSite } from '../data/content';
 import Icon from './Icon.astro';
 
-interface Props extends LiveSite {
-  badge: string;
-}
+type Props = LiveSite;
 
-const { name, url, domain, description, image, badge } = Astro.props;
+const { name, url, domain, description, image } = Astro.props;
 ---
 
 <a class="live-card rv tilt" href={url} target="_blank" rel="noopener">
@@ -28,7 +26,6 @@ const { name, url, domain, description, image, badge } = Astro.props;
     />
     <span class="live-arrow" aria-hidden="true"><Icon name="arrow-ne" /></span>
     <div class="live-info">
-      <span class="live-pill"><span class="pulse"></span>{badge}</span>
       <h3 class="title live-name">{name}</h3>
       <p class="live-desc">{description}</p>
     </div>

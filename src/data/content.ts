@@ -99,7 +99,6 @@ export interface Content {
     aside: string;
     liveLabel: string;
     liveAside: string;
-    liveBadge: string;
     behanceAside: string;
     cardCta: string;
     archiveLabel: string;
@@ -199,7 +198,6 @@ const pt: Content = {
     aside: 'Webapps, dashboards e redesigns de sites, do wireframe ao protótipo de alta fidelidade. Cada projeto abre no Behance ou no site no ar.',
     liveLabel: 'No ar agora',
     liveAside: 'Front-end em produção',
-    liveBadge: 'site no ar',
     behanceAside: 'Estudos de caso de UX/UI',
     cardCta: 'Ver no Behance ↗',
     archiveLabel: 'Arquivo',
@@ -471,7 +469,6 @@ const en: Content = {
     aside: 'Webapps, dashboards and website redesigns, from wireframe to high-fidelity prototype. Each project opens on Behance or on the live site.',
     liveLabel: 'Live now',
     liveAside: 'Front-end in production',
-    liveBadge: 'live site',
     behanceAside: 'UX/UI case studies',
     cardCta: 'View on Behance ↗',
     archiveLabel: 'Archive',
