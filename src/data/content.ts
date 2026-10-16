@@ -302,7 +302,7 @@ const pt: Content = {
         label: 'design',
         items: [
           { name: 'Figma', logo: 'figma' },
-          { name: 'FigJam' },
+          { name: 'FigJam', logo: 'figma' },
           { name: 'Miro', logo: 'miro' },
           { name: 'Photoshop', logo: 'photoshop' },
           { name: 'Illustrator', logo: 'illustrator' },
