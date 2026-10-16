@@ -54,10 +54,13 @@ export interface Work {
   alt: string;
 }
 
+export type StackLogo = 'figma' | 'miro' | 'photoshop' | 'illustrator' | 'canva';
+
 export interface StackItem {
   name: string;
   level?: string;
   soft?: boolean;
+  logo?: StackLogo; // logo colorida antes do nome (só na linha de design)
 }
 
 export interface StackGroup {
@@ -297,7 +300,14 @@ const pt: Content = {
     groups: [
       {
         label: 'design',
-        items: [{ name: 'Figma' }, { name: 'FigJam' }, { name: 'Miro' }, { name: 'Photoshop' }, { name: 'Illustrator' }, { name: 'Canva' }],
+        items: [
+          { name: 'Figma', logo: 'figma' },
+          { name: 'FigJam' },
+          { name: 'Miro', logo: 'miro' },
+          { name: 'Photoshop', logo: 'photoshop' },
+          { name: 'Illustrator', logo: 'illustrator' },
+          { name: 'Canva', logo: 'canva' },
+        ],
       },
       {
         label: 'processo',
@@ -331,10 +341,8 @@ const pt: Content = {
         items: [
           { name: 'Claude Code' },
           { name: 'Claude Design' },
-          { name: 'MCP', level: 'Figma' },
-          { name: 'MCP', level: 'FigJam' },
-          { name: 'MCP', level: 'Vercel' },
-          { name: 'Grok Bot', level: 'tarefas do dia a dia' },
+          { name: 'MCP' },
+          { name: 'Grok Bot' },
         ],
         note: '// IA no fluxo de trabalho, do Figma ao deploy, e na organização da rotina.',
       },
@@ -554,10 +562,8 @@ const en: Content = {
         items: [
           { name: 'Claude Code' },
           { name: 'Claude Design' },
-          { name: 'MCP', level: 'Figma' },
-          { name: 'MCP', level: 'FigJam' },
-          { name: 'MCP', level: 'Vercel' },
-          { name: 'Grok Bot', level: 'everyday tasks' },
+          { name: 'MCP' },
+          { name: 'Grok Bot' },
         ],
         note: '// AI in my workflow, from Figma to deploy, and in organizing my routine.',
       },

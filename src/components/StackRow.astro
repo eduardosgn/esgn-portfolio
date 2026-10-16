@@ -1,21 +1,33 @@
 ---
-import type { StackGroup } from '../data/content';
+import type { StackGroup, StackLogo } from '../data/content';
+import Figma from '../assets/logos/figma.svg';
+import Miro from '../assets/logos/miro.svg';
+import Photoshop from '../assets/logos/photoshop.svg';
+import Illustrator from '../assets/logos/illustrator.svg';
+import Canva from '../assets/logos/canva.svg';
 
 type Props = StackGroup;
 
 const { label, items, note } = Astro.props;
+
+// Logos coloridas (Figma, Miro, Photoshop e Illustrator: coleção "logos", CC0; Canva: devicon, MIT)
+const logos: Record<StackLogo, typeof Figma> = { figma: Figma, miro: Miro, photoshop: Photoshop, illustrator: Illustrator, canva: Canva };
 ---
 
 <div class="stack-row rv">
   <span class="stack-label"><b>~/</b>{label}</span>
   <ul class="stack-items">
     {
-      items.map((it) => (
-        <li class:list={['pill', { 'pill-soft': it.soft }]}>
-          {it.name}
-          {it.level && <small>{it.level}</small>}
-        </li>
-      ))
+      items.map((it) => {
+        const Logo = it.logo && logos[it.logo];
+        return (
+          <li class:list={['pill', { 'pill-soft': it.soft }]}>
+            {Logo && <Logo class="pill-logo" aria-hidden="true" />}
+            {it.name}
+            {it.level && <small>{it.level}</small>}
+          </li>
+        );
+      })
     }
   </ul>
   {note && <p class="stack-note">{note}</p>}

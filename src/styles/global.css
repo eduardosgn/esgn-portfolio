@@ -369,6 +369,7 @@
   .pill:hover { border-color: var(--acc); background: var(--acc-soft); transform: translateY(-3px); }
   .pill:hover small { color: var(--acc); }
   .pill-soft { border-style: dashed; }
+  .pill-logo { flex: none; width: auto; height: 1.05em; max-width: 1.1em; }
   .stack-note { grid-column: 2; font-size: 13px; color: var(--mut); }
 
   /* ---------- Experiência ---------- */
