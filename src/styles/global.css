@@ -235,13 +235,13 @@
   .line > span { display: inline-block; }
   /* Limitado a 9% de 1440px: acima disso a fonte para de crescer e o "." vazava */
   .line-2 { padding-left: min(9vw, 130px); }
-  .hero-bottom { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(440px, 100%), 1fr)); gap: clamp(32px, 4vw, 72px); align-items: start; margin-top: clamp(36px, 4.5vw, 72px); }
+  .hero-bottom { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(32px, 4vw, 72px); align-items: start; margin-top: clamp(36px, 4.5vw, 72px); }
   .lead { max-width: 54ch; font-size: clamp(15px, 1.25vw, 18px); line-height: 1.7; }
   .lead em { font-style: normal; color: var(--acc); }
   .btn-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
 
   /* Code card */
-  .code-card { justify-self: end; width: 100%; max-width: 540px; border: 1px solid var(--line2); border-radius: 16px; background: var(--card); overflow: hidden; transition: border-color .4s, transform .6s var(--ease), box-shadow .6s var(--ease); }
+  .code-card { justify-self: stretch; width: 100%; border: 1px solid var(--line2); border-radius: 16px; background: var(--card); overflow: hidden; transition: border-color .4s, transform .6s var(--ease), box-shadow .6s var(--ease); }
   .code-card:hover { border-color: var(--acc); transform: translateY(-4px); box-shadow: 0 28px 60px -34px var(--acc); }
   .code-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; height: 44px; padding: 0 16px; border-bottom: 1px solid var(--line); font-size: 12px; color: var(--mut); }
   .dots { display: flex; gap: 6px; }
@@ -474,6 +474,12 @@
   .nav-links, .nav-cta { display: none; }
 }
 
+/* Texto e code card lado a lado só quando o card tem espaço pra linha mais longa */
+@media (min-width: 1100px) {
+  .hero-bottom { grid-template-columns: minmax(0, 1fr) minmax(0, 600px); }
+  .code-card { justify-self: end; max-width: 600px; }
+}
+
 @media (min-width: 1021px) {
   .menu-btn, .mmenu { display: none !important; }
   /* Desktop: hero mais perto da nav e nome mais colado nas pills */
@@ -498,7 +504,6 @@
   .live-body { aspect-ratio: 16 / 10; }
   .sec-head { grid-template-columns: minmax(0, 1fr); gap: 14px; }
   .sec-aside { justify-self: start; }
-  .code-card { justify-self: stretch; max-width: none; }
   .row-main { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
   .stack-row { grid-template-columns: minmax(0, 1fr); }
   .stack-note { grid-column: auto; }
@@ -517,8 +522,10 @@
   .hero-name { font-size: 16vw; }
   .line-2 { padding-left: 0; }
   .btn-row .btn { flex: 1 1 auto; }
-  .code { font-size: 12px; }
-  .cl { padding: 0 14px; }
+  /* Fonte fluida: a linha mais longa do code card cabe numa linha de 320 a 640px */
+  .code { font-size: clamp(9px, 2.75vw, 12px); }
+  .cl { padding: 0 clamp(10px, 3.2vw, 14px); }
+  .cl::before { margin-right: 1.4ch; }
   .fact { grid-template-columns: 92px minmax(0, 1fr); }
   .pill { min-height: 46px; padding: 8px 16px; }
   .lnk-meta .lnk-url { display: none; }
