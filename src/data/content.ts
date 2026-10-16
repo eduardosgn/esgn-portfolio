@@ -341,8 +341,8 @@ const pt: Content = {
         items: [
           { name: 'Claude Code' },
           { name: 'Claude Design' },
-          { name: 'MCP' },
           { name: 'Grok Bot' },
+          { name: 'MCPs' },
         ],
         note: '// IA no fluxo de trabalho, do Figma ao deploy, e na organização da rotina.',
       },
@@ -562,8 +562,8 @@ const en: Content = {
         items: [
           { name: 'Claude Code' },
           { name: 'Claude Design' },
-          { name: 'MCP' },
           { name: 'Grok Bot' },
+          { name: 'MCPs' },
         ],
         note: '// AI in my workflow, from Figma to deploy, and in organizing my routine.',
       },
