@@ -1,7 +1,6 @@
 ---
 import Icon from './Icon.astro';
-import Clock from './Clock.astro';
-import { contact, getContent } from '../data/content';
+import { getContent } from '../data/content';
 
 const t = getContent(Astro.currentLocale);
 // Ano do build como fallback sem JS; o script troca pelo ano atual do visitante
@@ -11,7 +10,6 @@ const buildYear = new Date().getFullYear();
 <footer class="foot" data-foot>
   <div class="wrap foot-in">
     <span><span data-year>{buildYear}</span> Eduardo Nascimento</span>
-    <span>{contact.location}<Clock suffix=" (GMT-3)" /></span>
     <a class="top-link" href="#topo">{t.footer.toTop} <Icon name="arrow-up" size={14} /></a>
   </div>
 </footer>
