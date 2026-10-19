@@ -168,6 +168,12 @@
   .lang-switch[data-current="en"] .ls-knob { left: calc(100% - 38px); }
   .lang-switch.is-switching .ls-knob { left: calc(100% - 38px); }
   .lang-switch[data-current="en"].is-switching .ls-knob { left: 4px; }
+  /* Bandeira dentro da bolinha: a do idioma atual; durante a troca, a do próximo */
+  .ls-flag { display: none; width: 28px; height: 28px; border-radius: 50%; }
+  .lang-switch[data-current="pt-br"]:not(.is-switching) .ls-flag-pt,
+  .lang-switch[data-current="en"].is-switching .ls-flag-pt,
+  .lang-switch[data-current="en"]:not(.is-switching) .ls-flag-en,
+  .lang-switch[data-current="pt-br"].is-switching .ls-flag-en { display: block; }
 
   /* Ícone do tema: sol no dark, lua no light */
   .theme-btn .i-moon { display: none; }

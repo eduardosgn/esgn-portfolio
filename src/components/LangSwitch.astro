@@ -1,6 +1,6 @@
 ---
 // Mesma anatomia do LangSwitch da Athenas: pílula com PT/EN nas pontas e bolinha que desliza.
-// É um link para a outra versão da página, então funciona sem JS.
+// A bolinha mostra a bandeira do idioma atual. É um link para a outra versão, então funciona sem JS.
 import { getContent, getLang, LANGS } from '../data/content';
 
 const t = getContent(Astro.currentLocale);
@@ -14,12 +14,28 @@ const next = LANGS.find((l) => l.code !== current.code)!;
   hreflang={next.htmlLang}
   data-lang-switch
   data-current={current.code}
-  data-next-label={next.label}
   aria-label={`${t.a11y.language}: ${current.name}. ${t.a11y.switchTo} ${next.name}`}
   title={`${t.a11y.switchTo} ${next.name}`}
 >
   {LANGS.map((l) => <span class="ls-end" aria-hidden="true">{l.label}</span>)}
-  <span class="ls-knob" aria-hidden="true">{current.label}</span>
+  <span class="ls-knob" aria-hidden="true">
+    {/* Brasil */}
+    <svg class="ls-flag ls-flag-pt" viewBox="0 0 30 30" focusable="false">
+      <rect width="30" height="30" fill="#009C3B" />
+      <path d="M15 4 L27.5 15 L15 26 L2.5 15 Z" fill="#FFDF00" />
+      <circle cx="15" cy="15" r="6.4" fill="#002776" />
+      <path d="M8.9 13.4 Q15 11.6 21.3 15.4" fill="none" stroke="#fff" stroke-width="1.2" />
+    </svg>
+    {/* Reino Unido (recorte central da Union Jack) */}
+    <svg class="ls-flag ls-flag-en" viewBox="15 0 30 30" focusable="false">
+      <clipPath id="ls-uk-clip"><path d="M30 15h30v15zv15H0zH0V0zV0h30z" /></clipPath>
+      <rect width="60" height="30" fill="#012169" />
+      <path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6" />
+      <path d="M0 0l60 30m0-30L0 30" clip-path="url(#ls-uk-clip)" stroke="#C8102E" stroke-width="4" />
+      <path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10" />
+      <path d="M30 0v30M0 15h60" stroke="#C8102E" stroke-width="6" />
+    </svg>
+  </span>
 </a>
 
 <script>
@@ -29,7 +45,7 @@ const next = LANGS.find((l) => l.code !== current.code)!;
     if (target) requestAnimationFrame(() => target.scrollIntoView({ behavior: 'instant' }));
   }
 
-  // Desliza a bolinha antes de trocar de página e mantém a seção que está na tela
+  // Desliza a bolinha (trocando a bandeira) antes de mudar de página e mantém a seção que está na tela
   document.querySelectorAll<HTMLAnchorElement>('[data-lang-switch]').forEach((link) => {
     link.addEventListener('click', (e) => {
       if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
@@ -47,8 +63,6 @@ const next = LANGS.find((l) => l.code !== current.code)!;
         return;
       }
       link.classList.add('is-switching');
-      const knob = link.querySelector('.ls-knob');
-      if (knob) knob.textContent = link.dataset.nextLabel ?? '';
       setTimeout(() => (location.href = url), 260);
     });
   });
