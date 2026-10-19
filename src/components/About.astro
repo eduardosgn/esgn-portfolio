@@ -17,7 +17,7 @@ const a = t.about;
     <div class="about-grid">
       <div class="about-left rv">
         <figure class="photo">
-          <Image src={photo} alt={a.photoAlt} width={400} height={400} densities={[1]} formats={['avif', 'webp']} loading="lazy" decoding="async" />
+          <Image src={photo} alt={a.photoAlt} width={340} height={340} densities={[1, 2]} formats={['avif', 'webp']} loading="lazy" decoding="async" />
         </figure>
         <p class="statement">{a.statement}<br /><em>{a.statementEm}</em></p>
       </div>
