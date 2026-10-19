@@ -12,6 +12,7 @@ import coverStudentDashboard from '../assets/images/covers/edunext-student-dashb
 import coverCheckout from '../assets/images/covers/edunext-checkout.jpg';
 import coverWebapp from '../assets/images/covers/edunext-webapp.jpg';
 import coverInnoLabs from '../assets/images/covers/inno-labs.jpg';
+import coverReel from '../assets/images/covers/reel.jpg';
 
 /* ============ Idiomas ============ */
 
@@ -229,6 +230,13 @@ const pt: Content = {
       },
     ],
     grid: [
+      {
+        title: 'Reel.',
+        description: 'Framer Website Template',
+        href: 'https://www.behance.net/gallery/257313685/Reel-Framer-Website-Template',
+        image: coverReel,
+        alt: 'Capa do template Reel para Framer, com o título REEL. ao lado de um frame de vídeo de um ciclista',
+      },
       {
         title: 'VIA Webapp',
         description: 'UX/UI Design',
@@ -493,11 +501,12 @@ const en: Content = {
       { ...pt.works.featured[1], alt: 'Home page of the redesigned Minddhi website on a MacBook' },
     ],
     grid: [
-      { ...pt.works.grid[0], alt: 'VIA Webapp on a laptop and a phone over sand dunes at sunset' },
-      { ...pt.works.grid[1], alt: 'edunext Student Dashboard on a laptop and a phone' },
-      { ...pt.works.grid[2], alt: 'edunext checkout screens on phones' },
-      { ...pt.works.grid[3], alt: 'Financial dashboard of the edunext webapp on a laptop' },
-      { ...pt.works.grid[4], alt: 'Inno Labs website in a laptop and phone mockup' },
+      { ...pt.works.grid[0], alt: 'Cover of the Reel Framer template, with the REEL. title next to a video frame of a cyclist' },
+      { ...pt.works.grid[1], alt: 'VIA Webapp on a laptop and a phone over sand dunes at sunset' },
+      { ...pt.works.grid[2], alt: 'edunext Student Dashboard on a laptop and a phone' },
+      { ...pt.works.grid[3], alt: 'edunext checkout screens on phones' },
+      { ...pt.works.grid[4], alt: 'Financial dashboard of the edunext webapp on a laptop' },
+      { ...pt.works.grid[5], alt: 'Inno Labs website in a laptop and phone mockup' },
     ],
     archive: [
       { ...pt.works.archive[0] },
