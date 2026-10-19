@@ -164,10 +164,13 @@
   .lang-switch { position: relative; display: inline-flex; flex: none; align-items: center; justify-content: space-between; width: 84px; height: 44px; padding: 0 13px; border: 1px solid var(--line2); border-radius: 999px; transition: border-color .3s, background-color .3s; }
   .lang-switch:hover { border-color: var(--acc); background: var(--acc-soft); }
   .ls-end { width: 18px; text-align: center; font-size: 10px; font-weight: 700; letter-spacing: .04em; color: var(--mut); }
-  .ls-knob { position: absolute; top: 4px; left: 4px; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--acc); color: var(--on-acc); font-size: 11px; font-weight: 700; letter-spacing: .04em; box-shadow: 0 4px 12px color-mix(in srgb, var(--acc) 45%, transparent); transition: left .35s cubic-bezier(.3, 1.4, .4, 1); }
+  .ls-knob { position: absolute; top: 4px; left: 4px; display: grid; place-items: center; width: 34px; height: 34px; --knob: #009C3B; border-radius: 50%; background: var(--knob); box-shadow: 0 4px 12px color-mix(in srgb, var(--knob) 45%, transparent); transition: left .35s cubic-bezier(.3, 1.4, .4, 1), background-color .35s ease, box-shadow .35s ease; }
   .lang-switch[data-current="en"] .ls-knob { left: calc(100% - 38px); }
   .lang-switch.is-switching .ls-knob { left: calc(100% - 38px); }
   .lang-switch[data-current="en"].is-switching .ls-knob { left: 4px; }
+  /* Fundo da bolinha: verde no lado PT, vermelho no lado EN (acompanha a bolinha durante a troca) */
+  .lang-switch[data-current="en"]:not(.is-switching) .ls-knob,
+  .lang-switch[data-current="pt-br"].is-switching .ls-knob { --knob: #C8102E; }
   /* Bandeira dentro da bolinha: a do idioma atual; durante a troca, a do próximo */
   .ls-flag { display: none; width: 28px; height: 28px; border-radius: 50%; }
   .lang-switch[data-current="pt-br"]:not(.is-switching) .ls-flag-pt,
